@@ -1,15 +1,27 @@
 import React from 'react'
 
 const Tasks = (props) => {
-    const handleCheck = (id,value)=>{
-        props.onCheck(id,value);
+    const handleCheck = (i) => {
+        props.onCheck(i);
+    } 
+    const deleteTask = (e,i)=>{
+        e.preventDefault();
+        props.deleteTask(i);
     }
+    const toShowTasks = props.tasks;
     return (
         <div>
-            {props.tasks.map((item, i) => {
+            {toShowTasks.map((item, i) => {
                 return (
-                    <div style={item.isDone ? {textDecoration:"line-through"}:{}} key={i}>
-                        {item.text}<input type={"checkbox"} onClick={e=>handleCheck(item.id,e.target.checked)} key={i}/>
+                    <div key={i}>
+                        <label
+                            style={item.isDone ? { textDecoration: "line-through" } : { color: "red" }}
+                            htmlFor={item.id} >{item.text}
+                        </label>
+                        <input name={item.id} type={"checkbox"} onChange={e => handleCheck(i)} checked={item.isDone}/>
+                        <form style={{display:"inline"}} onSubmit={e=>deleteTask(e,i)}>
+                            <button>Delete</button>
+                        </form>
                     </div>
                 )
             })}

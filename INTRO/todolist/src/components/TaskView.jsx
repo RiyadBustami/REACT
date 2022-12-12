@@ -9,17 +9,18 @@ const TaskView = () => {
         setTasks([task,...tasks]);
         console.log(tasks);
     }
-    const checkTask=(id,value)=>{
-        const newTasks = tasks;
-        const index = newTasks.findIndex(Object=>Object.id === id);
-        newTasks[index].isDone = value;
-        setTasks(newTasks);
-        console.log(tasks[index].isDone);
+    const checkTask=(i)=>{
+        tasks[i].isDone = !tasks[i].isDone;
+        setTasks(tasks);
+        console.log(i);
+    }
+    const deleteTask=(idx)=>{
+        setTasks(tasks.filter((item,i)=>i!==idx));
     }
     return (
         <div>
             <TaskForm onSubmit={addTask} />
-            <Tasks tasks={tasks} onCheck={checkTask}/>
+            <Tasks tasks={tasks} onCheck={checkTask} deleteTask={deleteTask}/>
         </div>
     )
 }

@@ -10,6 +10,7 @@ const TaskForm = (props) => {
             text:task,
             isDone:false
         })
+        setTask('');
     }
     return (
         <form onSubmit={handleSubmit}>
