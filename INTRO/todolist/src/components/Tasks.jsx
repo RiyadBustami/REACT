@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 const Tasks = (props) => {
+    const [x,setX] = useState(0);
     const handleCheck = (i) => {
         props.onCheck(i);
+        setX(x+1);
     } 
     const deleteTask = (e,i)=>{
         e.preventDefault();

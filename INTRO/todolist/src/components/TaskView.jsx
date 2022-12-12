@@ -7,12 +7,11 @@ const TaskView = () => {
     const addTask = (task) => {
         task.id=tasks.length;
         setTasks([task,...tasks]);
-        console.log(tasks);
     }
     const checkTask=(i)=>{
-        tasks[i].isDone = !tasks[i].isDone;
-        setTasks(tasks);
-        console.log(i);
+        const newTasks=tasks;
+        newTasks[i].isDone = !newTasks[i].isDone;
+        setTasks(newTasks);
     }
     const deleteTask=(idx)=>{
         setTasks(tasks.filter((item,i)=>i!==idx));
