@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Display from './components/Display';
 
 function App() {
-  const [id, setId] = useState();
+  const [id, setId] = useState(1);
   const [category, setCategory] = useState("people");
   const [categories] = useState(["people", "planets"]);
   const navigate = useNavigate();
