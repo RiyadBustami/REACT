@@ -7,7 +7,7 @@ const Display = () => {
     const [item, setItem] = useState({});
     const { category, id } = useParams();
     useEffect(() => {
-        axios.get("https://swapi.dev/api/" + category + "/" + id).then((response) => setItem(response.data)).then(console.log(item));
+        axios.get("https://swapi.dev/api/" + category + "/" + id).then((response) => setItem(response.data));
     },[category,id]);
     return (
         category==="people"?<div>
