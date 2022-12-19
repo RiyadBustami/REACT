@@ -19,6 +19,12 @@ module.exports.getAllProducts = (request, response) => {
 
 module.exports.getProduct = (request, response) => {
     Product.findById(request.params.id)
-        .then(foundProduct=> response.json({product: foundProduct}))
+        .then(foundProduct=> response.json(foundProduct))
         .catch(err => response.json(err))
+}
+
+module.exports.updateProduct = (request, response) => {
+    Product.findByIdAndUpdate(request.params.id, request.body, {new:true})
+        .then(updatedProduct => response.json(updatedProduct))
+        .catch(err => console.log(err))
 }

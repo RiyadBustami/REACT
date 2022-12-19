@@ -8,12 +8,15 @@ const ProductDetails = () => {
     useEffect(() => {
         console.log(id);
         axios.get('http://localhost:8000/api/products/' + id)
-            .then(res => setProduct(res.data.product))
+            .then(res => setProduct(res.data))
             .catch(err => console.log(err))
     }, []);
     return (
         <div>
             <Link to={"/"}>Home</Link>
+            <Link to={"/" + product._id + "/edit"}>
+    Edit
+</Link>
             <p>Title: {product.title}</p>
             <p>Price: {product.price}</p>
             <p>Description: {product.description}</p>
