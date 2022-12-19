@@ -28,3 +28,9 @@ module.exports.updateProduct = (request, response) => {
         .then(updatedProduct => response.json(updatedProduct))
         .catch(err => console.log(err))
 }
+
+module.exports.deleteProduct = (request, response) => {
+    Product.findByIdAndDelete(request.params.id)
+        .then(deleteConfirmation => response.json(deleteConfirmation))
+        .catch(err => response.json(err))
+}
