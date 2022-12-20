@@ -1,38 +1,30 @@
 import React, { useState } from 'react'
-import axios from 'axios';
-const ProductForm = () => {
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState();
-    const [description, setDescription] = useState("");
-    const handleSubmit = (e)=>{
+const ProductForm = (props) => {
+    const { initialProduct, onSubmitProp } = props;
+    const [title, setTitle] = useState(initialProduct.title);
+    const [price, setPrice] = useState(initialProduct.price);
+    const [description, setDescription] = useState(initialProduct.description);
+    const handleSubmit = (e) => {
         console.log("Handling submit")
         e.preventDefault();
-        axios.post("http://localhost:8000/api/products", {
-            title,
-            price,
-            description,
-        })
-            .then(res=>console.log(res))
-            .then(()=>{
-                setTitle("");
-                setDescription("");
-                setPrice("");
-            })
-            .catch(err=>console.log(err))
+        onSubmitProp({title, price, description});
+        setTitle("");
+        setDescription("");
+        setPrice("");
     }
     return (
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Title: </label>
-                <input type='text' onChange={e=>setTitle(e.target.value)} value={title}/>
+                <input type='text' onChange={e => setTitle(e.target.value)} value={title} />
             </div>
             <div>
                 <label>Price: </label>
-                <input type='text' onChange={e=>setPrice(e.target.value)} value={price}/>
+                <input type='text' onChange={e => setPrice(e.target.value)} value={price} />
             </div>
             <div>
                 <label>Description: </label>
-                <input type='text' onChange={e=>setDescription(e.target.value)} value={description}/>
+                <input type='text' onChange={e => setDescription(e.target.value)} value={description} />
             </div>
             <button>Create Product </button>
         </form>

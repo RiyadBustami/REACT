@@ -1,31 +1,34 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import ProductForm from '../components/ProductForm';
 
 const Update = () => {
     const { id } = useParams();
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
+    const [loaded, setLoaded] = useState(false);
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get('http://localhost:8000/api/products/' + id)
             .then(res => {
                 setTitle(res.data.title);
                 setPrice(res.data.price);
                 setDescription(res.data.description);
+                setLoaded(true);
             })
-    }, [])
+    },[id])
 
-    const updateProduct = e => {
-        e.preventDefault();
+    const updateProduct = product => {
         axios.put('http://localhost:8000/api/products/'+id, {
-            title,
-            price,
-            description,
+            title: product.title,
+            price: product.price,
+            description: product.description,
         })
-            .then(res => console.log(res))
+            .then(res => {console.log(res); navigate("/"+id);})
             .catch(err=>console.log(err));
     }
 
@@ -33,30 +36,7 @@ const Update = () => {
         <div>
             <Link to={"/"}>Home</Link>
             <h1>Update a Product</h1>
-            <form onSubmit={updateProduct}>
-                <p>
-                    <label>Title</label><br />
-                    <input type="text" 
-                    name="title" 
-                    value={title} 
-                    onChange={(e) => { setTitle(e.target.value) }} />
-                </p>
-                <p>
-                    <label>Price</label><br />
-                    <input type="text" 
-                    name="price"
-                    value={price} 
-                    onChange={(e) => { setPrice(e.target.value) }} />
-                </p>
-                <p>
-                    <label>Description</label><br />
-                    <input type="text" 
-                    name="description"
-                    value={description} 
-                    onChange={(e) => { setDescription(e.target.value) }} />
-                </p>
-                <input type="submit" />
-            </form>
+            {loaded && <ProductForm initialProduct={{title, price, description}} onSubmitProp={updateProduct}/>}
         </div>
     )
 }

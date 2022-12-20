@@ -14,13 +14,20 @@ const Main = () => {
             .catch(err => console.error(err));
     }, []);
 
-    const removeFromDom = (id)=>{
-        setProducts(products.filter((product)=>product._id != id));
+    const removeFromDom = (id) => {
+        setProducts(products.filter((product) => product._id !== id));
 
+    }
+    const createProduct = (product) => {
+        axios.post('http://localhost:8000/api/products', product)
+            .then(res => {
+                setProducts([...products, res.data]);
+            })
+            .catch(err=>console.log(err))
     }
     return (
         <div>
-            <ProductForm />
+            <ProductForm initialProduct={{title:"", price:"", description:""}} onSubmitProp={createProduct} />
             <hr />
             {loaded && <ProductList removeFromDom={removeFromDom} products={products} />}
         </div>
