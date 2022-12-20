@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import ProductForm from '../components/ProductForm';
+import DeleteButton from '../components/DeleteButton';
 
 const Update = () => {
     const { id } = useParams();
@@ -37,6 +38,7 @@ const Update = () => {
             <Link to={"/"}>Home</Link>
             <h1>Update a Product</h1>
             {loaded && <ProductForm initialProduct={{title, price, description}} onSubmitProp={updateProduct}/>}
+            <DeleteButton id={id} successCallback={()=>navigate("/")}/>
         </div>
     )
 }

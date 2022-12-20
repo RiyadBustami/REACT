@@ -1,16 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import DeleteButton from './DeleteButton';
 
 const ProductList = (props) => {
     const { removeFromDom } = props;
-    const deleteProduct = (productId) => {
-        axios.delete('http://localhost:8000/api/products/' + productId)
-            .then(res => {
-                removeFromDom(productId)
-            })
-            .catch(err => console.error(err));
-    }
     return (
         <div>
             {props.products.map((product, i) => {
@@ -19,9 +12,7 @@ const ProductList = (props) => {
                         {product.title}
                     </Link>
                     |
-                    <button onClick={(e) => { deleteProduct(product._id) }}>
-                        Delete
-                    </button>
+                    <DeleteButton id={product._id} successCallback={e=>removeFromDom(product._id)} />
                 </p>
             })}
         </div>
