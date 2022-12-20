@@ -5,10 +5,13 @@ const DeleteButton = (props) => {
     const { id, successCallback } = props;
 
     const deleteProduct = (e) => {
+        const del = window.confirm("Are you sure?");
+        if(del){
         axios.delete('http://localhost:8000/api/products/'+id)
             .then(res=>{
                 successCallback();
             })
+        }
 
     }
     return (
