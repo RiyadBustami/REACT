@@ -7,7 +7,7 @@ const Main = () => {
         <div>
             <Link to={"/new"}>Add an author</Link>
             <h2>We have quotes by:</h2>
-            <AuthorList />
+            <AuthorList/>
         </div>
     )
 }

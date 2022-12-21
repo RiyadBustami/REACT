@@ -20,7 +20,7 @@ const AuthorList = () => {
         setAuthors(authors.filter(author => author._id!==id))
     }
     return (
-        <table>
+        <table style={{margin:"0 auto"}}>
             <thead>
                 <tr>
                     <th>Author</th>
