@@ -7,8 +7,7 @@ const PlayerAddView = () => {
     return (
         <div className='bg-light'>
             <div className='h3 border-5 py-3'>
-                <Link to={"/players/list"}>Manage Players</Link><span> | </span>
-                <Link to={""}>Manage Player Status</Link>
+
             
 
             <div className='py-4 border border-2 w-75 mx-auto'>
