@@ -28,7 +28,7 @@ const GamesView = () => {
     
     return (
         <div>
-            <Link to={"/status/game/1"}>Game1</Link><span> | </span>
+            <Link to={"/status/game/1"} style={num===1?{backgroundColor:'red'}:{}}>Game1</Link><span> | </span>
             <Link to={"/status/game/2"}>Game2</Link><span> | </span>
             <Link to={"/status/game/3"}>Game3</Link>
             {loaded && <GamePlayersTable num={num} players={players} changeGameStatus={changeGameStatus}/>}
