@@ -23,10 +23,9 @@ const GamePlayersTable = (props) => {
                 {players.map((player, i)=><tr className='row mx-auto'>
                     <td className='col'>{player.name}</td>
                     <td className='col d-flex justify-content-between'>
-                        <button onClick={e=>changeGameStatus(game,player._id,2)}>Playing</button>
-                        <button onClick={e=>changeGameStatus(game,player._id,1)}>Not Playing</button>
-                        <button onClick={e=>changeGameStatus(game,player._id,0)}>Undecided</button>
-                        <span>{gameStatus[player[game]]}</span>
+                        <button onClick={e=>changeGameStatus(game,player._id,2)} style={player[game]===2?{backgroundColor:"green"}:{}}>Playing</button>
+                        <button onClick={e=>changeGameStatus(game,player._id,1)} style={player[game]===1?{backgroundColor:"red"}:{}}>Not Playing</button>
+                        <button onClick={e=>changeGameStatus(game,player._id,0)} style={player[game]===0?{backgroundColor:"yellow"}:{}}>Undecided</button>
                         </td>
                 </tr>)}
             </tbody>
