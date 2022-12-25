@@ -12,13 +12,15 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     useEffect(() => {
         socket.on("connection", (data) => console.log(data));
-        socket.on("chat", data => {setMessages(data);console.log(messages);});
+        socket.on("chat", data => { setMessages(data); console.log(messages); });
     })
     const sendMessage = (txt) => {
-        socket.emit("chat", {username,txt});
+        socket.emit("chat", { username, txt });
     }
     const onLogin = (username) => {
-        setUsername(username);
+        if (username.length) {
+            setUsername(username);
+        }
     }
     return (
         <div>
@@ -26,7 +28,7 @@ const Chat = () => {
                 !username ?
                     <LoginForm onLogin={onLogin} /> :
                     <div>
-                        <Messages messages={messages} />
+                        <Messages username={username} messages={messages} />
                         <MessageForm sendMessage={sendMessage} />
                     </div>
             }
