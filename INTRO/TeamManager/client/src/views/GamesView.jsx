@@ -28,9 +28,9 @@ const GamesView = () => {
     
     return (
         <div>
-            <Link to={"/status/game/1"} style={num===1?{backgroundColor:'red'}:{}}>Game1</Link><span> | </span>
-            <Link to={"/status/game/2"}>Game2</Link><span> | </span>
-            <Link to={"/status/game/3"}>Game3</Link>
+            <Link to={"/status/game/1"} style={num==='1'?{color:'black'}:{}}>Game1</Link><span> | </span>
+            <Link to={"/status/game/2"} style={num==='2'?{color:'black'}:{}}>Game2</Link><span> | </span>
+            <Link to={"/status/game/3"} style={num==='3'?{color:'black'}:{}}>Game3</Link>
             {loaded && <GamePlayersTable num={num} players={players} changeGameStatus={changeGameStatus}/>}
         </div>
     )
